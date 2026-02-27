@@ -163,10 +163,34 @@ table{
 }
 
 /* adjust layout for narrow viewports */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .partie_bouton {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .dropdown-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .dropdown-content {
+        min-width: calc(100vw - 40px);
+        max-width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .dropdown-content.show {
+        max-height: 50vh;
+    }
+
+    .dropdown-content button {
+        padding: 10px 12px;
+        font-size: 13px;
+        margin: 3px 0;
     }
 }
 
