@@ -28,13 +28,17 @@ button.active{
 }
 
 .mer{
-    margin-top: 10px;
+    margin-top: 10px
+
 }
 
 .premier-plan{
     background-color: #A7C7E7;
-    margin: 0 500px;  
-    min-height: 100vh;  
+    /* center container and allow it to shrink on small screens */
+    margin: 0 auto;
+    max-width: 1200px;      /* limit width on large screens */
+    padding: 20px;          /* add some breathing room */
+    min-height: 100vh;
 }
 
 .barre{
@@ -45,40 +49,46 @@ button.active{
 
 .mise-en-page{
     margin: 20px;
-    
+    max-width: 100%;
 }
 
 td{
     border: 1px solid black;
-    padding: 10px;
+    padding: 0.5em 1em;
 }
 
 th{
     border: 1px solid black;
-    padding: 10px;
+    padding: 0.5em 1em;
 }
 
 table{
-    border-collapse: collapse
+    border-collapse: collapse;
+    width: 100%;            /* tables take full width of container */
 }
 
 .partie_bouton{
     display: flex;
-    flex-wrap: wrap;      
+    flex-wrap: wrap;
     gap: 10px;
+    justify-content: center; /* center buttons */
 }
 
-.image{
-    height: 400px;
-    width: 600px;
+/* adjust layout for narrow viewports */
+@media (max-width: 600px) {
+    .partie_bouton {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
-.image2{
-    height: 400px;
-    width: 700px;
+.image,
+.image2,
+.image3 {
+    /* make images scale with their container */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-.image3{
-    height: 400px;
-    width: 550px;
-}
