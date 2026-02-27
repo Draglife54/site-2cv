@@ -11,48 +11,23 @@
             <h1 class="mise-en-page"> Tout les types de 2Cv</h1><br>
 
 
-            <div class="partie_bouton">   
-                <div>
-                    <button onclick="afficher('Menu')"> Menu </button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv A')">2Cv A</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv AZ')" > 2Cv AZ</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv AZL')" > 2Cv AZL</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv AZAM')" > 2Cv AZAM</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv 4')" > 2Cv 4</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv 6')" > 2Cv 6</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv SPOT')" > 2Cv SPOT</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv CHARLESTON')" > 2Cv Charleston</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv DOLLY')" > 2Cv Dolly</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv FRANCE3')" > 2Cv France 3</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv COCORICO')" > 2Cv Cocorico</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv PERRIER')" > 2Cv Perrier</button>
-                </div>
-                <div>
-                    <button onclick="afficher('2cv AK400')" > Fourgonnette 2CV AK400</button>
+            <div class="dropdown-menu">
+                <button class="dropdown-btn" onclick="toggleDropdown()">☰ Sélectionner une 2CV</button>
+                <div id="dropdownContent" class="dropdown-content">
+                    <button onclick="afficher('Menu'); toggleDropdown()"> Menu </button>
+                    <button onclick="afficher('2cv A'); toggleDropdown()">2Cv A</button>
+                    <button onclick="afficher('2cv AZ'); toggleDropdown()" > 2Cv AZ</button>
+                    <button onclick="afficher('2cv AZL'); toggleDropdown()" > 2Cv AZL</button>
+                    <button onclick="afficher('2cv AZAM'); toggleDropdown()" > 2Cv AZAM</button>
+                    <button onclick="afficher('2cv 4'); toggleDropdown()" > 2Cv 4</button>
+                    <button onclick="afficher('2cv 6'); toggleDropdown()" > 2Cv 6</button>
+                    <button onclick="afficher('2cv SPOT'); toggleDropdown()" > 2Cv SPOT</button>
+                    <button onclick="afficher('2cv CHARLESTON'); toggleDropdown()" > 2Cv Charleston</button>
+                    <button onclick="afficher('2cv DOLLY'); toggleDropdown()" > 2Cv Dolly</button>
+                    <button onclick="afficher('2cv FRANCE3'); toggleDropdown()" > 2Cv France 3</button>
+                    <button onclick="afficher('2cv COCORICO'); toggleDropdown()" > 2Cv Cocorico</button>
+                    <button onclick="afficher('2cv PERRIER'); toggleDropdown()" > 2Cv Perrier</button>
+                    <button onclick="afficher('2cv AK400'); toggleDropdown()" > Fourgonnette 2CV AK400</button>
                 </div>
             </div> 
 
@@ -1009,6 +984,33 @@
                 div.style.display = 'none';
             });
             document.getElementById(id).style.display = 'block';
+            
+            // Enlever la classe active de tous les boutons du dropdown
+            document.querySelectorAll('.dropdown-content button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Ajouter la classe active au bouton cliqué
+            event.target.classList.add('active');
+            
+            // Mettre à jour le texte du bouton principal avec le texte du bouton sélectionné
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+            dropdownBtn.textContent = event.target.textContent.trim();
+        }
+
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdownContent');
+            dropdownContent.classList.toggle('show');
+        }
+
+        // Fermer le dropdown si on clique en dehors
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                const dropdownContent = document.getElementById('dropdownContent');
+                if (dropdownContent.classList.contains('show')) {
+                    dropdownContent.classList.remove('show');
+                }
+            }
         }
         </script>
     </body>
