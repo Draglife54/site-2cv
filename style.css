@@ -194,9 +194,7 @@ table{
     }
 }
 
-.image,
-.image2,
-.image3 {
+.image{
     /* make images scale with their container */
     max-width: 100%;
     height: auto;
