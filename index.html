@@ -2119,23 +2119,30 @@
         </div>
 
         <script>
-        function afficher(id) {
+        function afficher(id, clickedBtn = null) {
             document.querySelectorAll('.contenu').forEach(div => {
                 div.style.display = 'none';
             });
-            document.getElementById(id).style.display = 'block';
-            
-            // Enlever la classe active de tous les boutons du dropdown
+            const section = document.getElementById(id);
+            if (!section) return;
+            section.style.display = 'block';
+
+            // Save the current choice in URL hash for reload
+            window.location.hash = encodeURIComponent(id);
+
             document.querySelectorAll('.dropdown-content button').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Ajouter la classe active au bouton cliqué
-            event.target.classList.add('active');
-            
-            // Mettre à jour le texte du bouton principal avec le texte du bouton sélectionné
-            const dropdownBtn = document.querySelector('.dropdown-btn');
-            dropdownBtn.textContent = event.target.textContent.trim();
+
+            if (clickedBtn) {
+                clickedBtn.classList.add('active');
+                document.querySelector('.dropdown-btn').textContent = clickedBtn.textContent.trim();
+            }
+        }
+
+        function handleMenuClick(id, event) {
+            afficher(id, event.currentTarget);
+            toggleDropdown();
         }
 
         function toggleDropdown() {
@@ -2143,15 +2150,25 @@
             dropdownContent.classList.toggle('show');
         }
 
-        // Fermer le dropdown si on clique en dehors
-        window.onclick = function(event) {
+        window.addEventListener('click', function(event) {
             if (!event.target.matches('.dropdown-btn')) {
                 const dropdownContent = document.getElementById('dropdownContent');
                 if (dropdownContent.classList.contains('show')) {
                     dropdownContent.classList.remove('show');
                 }
             }
-        }
+        });
+
+        window.addEventListener('load', function() {
+            const hash = decodeURIComponent((window.location.hash || '#Menu').slice(1));
+            const target = document.getElementById(hash) ? hash : 'Menu';
+            const btn = Array.from(document.querySelectorAll('.dropdown-content button')).find(b => b.textContent.trim() === target || encodeURIComponent(b.textContent.trim()) === encodeURIComponent(target));
+            if (btn) {
+                btn.classList.add('active');
+                document.querySelector('.dropdown-btn').textContent = btn.textContent.trim();
+            }
+            afficher(target);
+        });
         </script>
     </body>
 </html>
